@@ -7,7 +7,7 @@ def field():
 
 def player_turn():
     while True:
-        cell = input("Вы ходите в: ").split()
+        cell = input('Вы ходите в: ').split()
         if len(cell) != 2:
             print('Введите 2 координаты через пробел!')
             continue
@@ -48,5 +48,21 @@ while True:
         playing_field[x][y] = 'O'
 
     if move_number == 9:
-        break
         print('Ничья')
+        break
+
+def win():
+    winning_combination = [((0, 0), (0, 1), (0, 2)), ((1, 0), (1, 1), (1, 2)), ((2, 0), (2, 1), (2, 2)),
+                           ((0, 2), (1, 1), (2, 0)), ((0, 0), (1, 1), (2, 2)), ((0, 0), (1, 0), (2, 0)),
+                           ((0, 1), (1, 1), (2, 1)), ((0, 2), (1, 2), (2, 2))]
+    for combination in winning_combination:
+        a = combination[0]
+        b = combination[1]
+        c = combination[2]
+
+        if playing_field[a[0]][a[1]] == playing_field[b[0]][b[1]] == playing_field[c[0]][c[1]] != ' ':
+            print(f'Победил {playing_field[a[0]][a[1]]}!')
+            return True
+        return False
+
+win()
